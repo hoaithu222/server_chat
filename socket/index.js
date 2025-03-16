@@ -12,7 +12,6 @@ const app = express();
 
 /*
 socket connection
-
 */
 export const server = http.createServer(app);
 const io = new Server(server, {
@@ -34,8 +33,8 @@ io.on('connection', async (socket) => {
     const token = socket.handshake.auth.token;
     // current user details 
     const user = await getUserDetailWithToken(token);
-    socket.join(user?._id.toString());
-    onlineUser.add(user?._id.toString());
+    socket.join(user?._id?.toString());
+    onlineUser.add(user?._id?.toString());
     io.emit('online user', Array.from(onlineUser));
     socket.on('message page', async (userId) => {
         console.log("userid", userId);
